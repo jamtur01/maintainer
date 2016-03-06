@@ -13,10 +13,11 @@ class Maintainer
   end
 
   def run
-    report(:service => options[:event_service],
+    report(:type => 'maintenance-mode',
+           :service => options[:event_service],
            :state => options[:event_state],
            :ttl => options[:ttl],
-           :description => "Maintenance is active")
+           :description => "Maintenance is #{options[:event_state]}")
   end
 
 end

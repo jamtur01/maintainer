@@ -12,7 +12,7 @@ gemspec = Gem::Specification.new do |s|
   s.rubyforge_project = 'maintainer'
 
   s.name = 'maintainer'
-  s.version = '0.1.0'
+  s.version = '0.1.2'
   s.author = 'James Turnbull'
   s.email = 'james@lovedthanlost.net'
   s.homepage = 'https://github.com/jamtur01/maintainer'
@@ -20,8 +20,7 @@ gemspec = Gem::Specification.new do |s|
   s.summary = 'Submits maintainance events to Riemann.'
   s.license = 'MIT'
 
-  s.add_dependency 'riemann-tools', '>= 0.2.8'
-  s.add_dependency 'json'
+  s.add_runtime_dependency 'riemann-tools', '~> 0.2', '>= 0.2.8'
 
   s.files = FileList['bin/*', 'LICENSE', 'README.md'].to_a
   s.executables |= Dir.entries('bin/')

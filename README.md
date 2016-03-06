@@ -14,22 +14,33 @@ maintainer --help
 Generates a maintenance event that you can inject into the Riemann index
 and use to indicate a host is in maintenance mode.
 
+The state of the event defaults to `active` but you can specify an
+alternate state with the `--event-state` flag.
+
+The `:service` field defaults to `maintenance-mode` but can be
+overridden with the `--event-service` flag. The host defaults to the
+host the command is run on but can be overridden with the `--event-host`
+flag.
+
 ### Starting maintenance
 
-```json
+```
 maintainer --host riemann.example.com
 {:host server.example.com, :service maintenance-mode, :state
-active, :description Maintenance is active, :metric nil, :tags nil,
-:time 1457278453, :ttl Infinity}
+active, :description Maintenance is active, :type maintenance-mode, :metric nil,
+:tags nil, :time 1457278453, :ttl Infinity}
 ```
+
+You will see a new attribute called `:type` with a value of
+`maintenance-mode` that you could also use for filtering.
 
 ### Ending maintenance
 
-```json
-maintainer --host riemann.example.com --event-state nil
+```
+maintainer --host riemann.example.com --event-state inactive
 {:host server.example.com, :service maintenance-mode, :state
-nil, :description Maintenance is active, :metric nil, :tags nil,
-:time 1457278453, :ttl Infinity}
+inactive, :description Maintenance is inactive, :type maintenance-mode,
+:metric nil, :tags nil, :time 1457278567, :ttl Infinity}
 ```
 
 ### Riemann configuration
