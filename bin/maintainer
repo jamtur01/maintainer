@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+require 'riemann/tools'
+
+class Maintainer
+  include Riemann::Tools
+
+  opt :event_state, 'State of maintenance event', type: :string, default: 'active'
+  opt :event_service, 'Service of maintenance event', type: :string, default: 'maintenance-mode'
+
+  def initialize
+    options[:ttl] = Float::INFINITY
+  end
+
+  def run
+    report(:service => options[:event_service],
+           :state => options[:event_state],
+           :ttl => options[:ttl],
+           :description => "Maintenance is active")
+  end
+
+end
+Maintainer.run
